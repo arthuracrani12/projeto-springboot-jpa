@@ -3,11 +3,26 @@ package com.arthuracrani.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+//converter os objetos para o modelo relacional
+@Entity
+@Table(name = "tb_user")
 //seriazible para transformar o objeto em cadeias de bites para trafegar na rede
 public class User implements Serializable {
-
+	
+	
 	//número de série padrão
 	private static final long serialVersionUID = 1L;
+	
+	//mostrar para o JPA qual a chave primaria do BD
+	@Id
+	//para a chave ser autoincrementada no BD
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
