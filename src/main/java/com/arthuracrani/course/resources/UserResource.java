@@ -1,23 +1,40 @@
 package com.arthuracrani.course.resources;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arthuracrani.course.entities.User;
+import com.arthuracrani.course.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
 
+	//para que o spring já realize a injeção de depeendcia 
+	@Autowired
+	private UserService service;
+	
+	
 	//controlador Rest que responde no caminhgo user
 	@GetMapping
-	public ResponseEntity<User> findAll() {
-		User u = new User(1L, "Arthur", "arthur@gmail.com", "99999999", "123");
-		return ResponseEntity.ok().body(u);
+	public ResponseEntity<List<User>> findAll() {
+		List<User> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 	
+	//indica que a requisição aceita um ID dentro da URL
+	//endpoint da aplicação
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<User> findById(@PathVariable Long id) {
+		User obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
+	}
 }
 
 
