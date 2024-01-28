@@ -1,0 +1,40 @@
+package com.arthuracrani.course.resources;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.arthuracrani.course.entities.Category;
+import com.arthuracrani.course.services.CategoryService;
+
+@RestController
+@RequestMapping(value = "/categories")
+public class CategoryResource {
+
+	//para que o spring já realize a injeção de depeendcia 
+	@Autowired
+	private CategoryService service;
+	
+	
+	//controlador Rest que responde no caminhgo user
+	@GetMapping
+	public ResponseEntity<List<Category>> findAll() {
+		List<Category> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	//indica que a requisição aceita um ID dentro da URL
+	//endpoint da aplicação
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Category> findById(@PathVariable Long id) {
+		Category obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
+	}
+}
+
+

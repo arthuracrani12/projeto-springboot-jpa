@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.arthuracrani.course.entities.Category;
 import com.arthuracrani.course.entities.Order;
 import com.arthuracrani.course.entities.User;
 import com.arthuracrani.course.entities.enums.OrderStatus;
+import com.arthuracrani.course.repositories.CategoryRepository;
 import com.arthuracrani.course.repositories.OrderRepository;
 import com.arthuracrani.course.repositories.UserRepository;
 
@@ -25,10 +27,21 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private OrderRepository orderRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	//implementnado commandLineRunner tudo que estiver na função run será executdao quando a função for iniciada
 	@Override
 	public void run(String... args) throws Exception {
+		
+		
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers"); 
+
+		//saalvar no BD as categorias
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		
 		//ID está null pq o ID será gerado pelo BD
 		User u1 = new User(null, "Arthur Acrani", "maria@gmail.com", "988888888", "123456");
