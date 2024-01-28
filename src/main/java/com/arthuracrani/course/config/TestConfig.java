@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.arthuracrani.course.entities.Category;
 import com.arthuracrani.course.entities.Order;
+import com.arthuracrani.course.entities.Product;
 import com.arthuracrani.course.entities.User;
 import com.arthuracrani.course.entities.enums.OrderStatus;
 import com.arthuracrani.course.repositories.CategoryRepository;
 import com.arthuracrani.course.repositories.OrderRepository;
+import com.arthuracrani.course.repositories.ProductRepository;
 import com.arthuracrani.course.repositories.UserRepository;
 
 //para mostrar que é uma classe de configuração
@@ -30,6 +32,10 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
+	
 
 	//implementnado commandLineRunner tudo que estiver na função run será executdao quando a função for iniciada
 	@Override
@@ -40,8 +46,16 @@ public class TestConfig implements CommandLineRunner{
 		Category cat2 = new Category(null, "Books");
 		Category cat3 = new Category(null, "Computers"); 
 
+		Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+		
 		//saalvar no BD as categorias
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		//salvar no BD os produtos
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
 		//ID está null pq o ID será gerado pelo BD
 		User u1 = new User(null, "Arthur Acrani", "maria@gmail.com", "988888888", "123456");
