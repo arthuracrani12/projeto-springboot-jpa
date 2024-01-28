@@ -9,11 +9,14 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+//por ser uma classe auxiliar de chave composta: 
 @Embeddable
 public class OrderItemPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	//relacionamentos muitos para um
 	@ManyToOne
+	//nome da classe
 	@JoinColumn(name = "order_id")
 	private Order order;
 
