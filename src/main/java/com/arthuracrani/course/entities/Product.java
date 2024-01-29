@@ -94,6 +94,7 @@ public class Product implements Serializable {
 	}
 	
 	@JsonIgnore
+	//para cada ordemItem pegar o ordem associado a ele. Para cadaa item pedido pegar o pedido relacionado a ele  
 	public Set<Order> getOrders() {
 		Set<Order> set = new HashSet<>();
 		for (OrderItem x : items) {
